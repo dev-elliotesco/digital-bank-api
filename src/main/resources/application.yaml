@@ -1,1 +1,9 @@
-spring.application.name=digital-bank
+spring:
+  application:
+    name: ${APP_NAME}
+  data:
+    mongodb:
+      uri: mongodb+srv://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/
+      database: ${DB_NAME}
+server:
+  port: ${PORT}
