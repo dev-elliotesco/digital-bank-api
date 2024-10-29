@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -17,5 +18,5 @@ public class Account {
     private String id;
     private String number;
     private String type;
-    private List<Transaction> transactions;
+    private List<Transaction> transactions = new ArrayList<>();
 }
