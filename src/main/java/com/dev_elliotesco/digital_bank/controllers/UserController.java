@@ -1,7 +1,9 @@
 package com.dev_elliotesco.digital_bank.controllers;
 
-import com.dev_elliotesco.digital_bank.models.User;
+import com.dev_elliotesco.digital_bank.dtos.UserRequestDTO;
+import com.dev_elliotesco.digital_bank.dtos.UserResponseDTO;
 import com.dev_elliotesco.digital_bank.services.UserService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +18,7 @@ public class UserController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Mono<User> registerUser(@RequestBody User user) {
-        return userService.registerUser(user);
+    public Mono<UserResponseDTO> registerUser(@Valid @RequestBody UserRequestDTO userRequest) {
+        return userService.registerUser(userRequest);
     }
 }

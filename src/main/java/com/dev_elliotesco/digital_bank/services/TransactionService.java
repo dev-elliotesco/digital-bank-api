@@ -1,5 +1,8 @@
 package com.dev_elliotesco.digital_bank.services;
 
+import com.dev_elliotesco.digital_bank.dtos.TransactionRequestDTO;
+import com.dev_elliotesco.digital_bank.dtos.TransactionResponseDTO;
+import com.dev_elliotesco.digital_bank.mappers.TransactionMapper;
 import com.dev_elliotesco.digital_bank.models.Transaction;
 import com.dev_elliotesco.digital_bank.repositories.AccountRepository;
 import com.dev_elliotesco.digital_bank.repositories.TransactionRepository;
@@ -12,13 +15,15 @@ import reactor.core.publisher.Mono;
 public class TransactionService {
 
     private final TransactionRepository transactionRepository;
+    private final TransactionMapper transactionMapper;
     private final AccountRepository accountRepository;
 
-    public Mono<Transaction> makeTransaction(String accountId, Transaction transaction) {
+    public Mono<TransactionResponseDTO> makeTransaction(String accountId, TransactionRequestDTO request) {
         return accountRepository.findById(accountId)
                 .flatMap(account -> {
-                    account.getTransactions().add(transaction);
-                    return accountRepository.save(account).then(transactionRepository.save(transaction));
+                    Transaction transaction = transactionMapper.toTransaction(request);
+                    return transactionRepository.save(transaction)
+                            .map(savedTransaction -> transactionMapper.toTransactionResponseDTO(savedTransaction, accountId));
                 });
     }
 

@@ -1,7 +1,9 @@
 package com.dev_elliotesco.digital_bank.controllers;
 
-import com.dev_elliotesco.digital_bank.models.Transaction;
+import com.dev_elliotesco.digital_bank.dtos.TransactionRequestDTO;
+import com.dev_elliotesco.digital_bank.dtos.TransactionResponseDTO;
 import com.dev_elliotesco.digital_bank.services.TransactionService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +18,9 @@ public class TransactionController {
 
     @PostMapping("/{accountId}")
     @ResponseStatus(HttpStatus.CREATED)
-    public Mono<Transaction> makeTransaction(@PathVariable String accountId, @RequestBody Transaction transaction) {
-        return transactionService.makeTransaction(accountId, transaction);
+    public Mono<TransactionResponseDTO> makeTransaction(
+            @PathVariable String accountId,
+            @Valid @RequestBody TransactionRequestDTO transactionRequest) {
+        return transactionService.makeTransaction(accountId, transactionRequest);
     }
 }
