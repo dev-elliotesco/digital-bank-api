@@ -17,7 +17,7 @@ import reactor.core.publisher.Mono;
 
 import java.util.List;
 
-@Tag(name = "Account", description = "Endpoints para la gestión de cuentas de usuario en el banco digital.")
+@Tag(name = "Account", description = "Operaciones relacionadas con las cuentas de usuario en el banco digital.")
 public interface AccountControllerDOC {
 
     @Operation(
