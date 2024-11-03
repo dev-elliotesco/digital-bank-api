@@ -7,6 +7,7 @@ import com.dev_elliotesco.digital_bank.models.User;
 import com.dev_elliotesco.digital_bank.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Service
@@ -15,10 +16,20 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final UserMapper userMapper;
+    private final AccountService accountService;
 
     public Mono<UserResponseDTO> registerUser(UserRequestDTO userRequest) {
         User user = userMapper.toUser(userRequest);
         return userRepository.save(user)
                 .map(userMapper::toUserResponseDTO);
+    }
+
+    public Mono<Double> getTotalBalanceForUser(String userId) {
+        return userRepository.findById(userId)
+                .flatMap(user -> {
+                    return Flux.fromIterable(user.getAccounts())
+                            .flatMap(account -> accountService.getBalance(account.getNumber()))
+                            .reduce(0.0, Double::sum);
+                });
     }
 }

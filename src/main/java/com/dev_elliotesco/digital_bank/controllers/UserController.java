@@ -21,4 +21,10 @@ public class UserController {
     public Mono<UserResponseDTO> registerUser(@Valid @RequestBody UserRequestDTO userRequest) {
         return userService.registerUser(userRequest);
     }
+
+    @GetMapping("/total-balance/{userId}")
+    @ResponseStatus(HttpStatus.OK)
+    public Mono<Double> getTotalBalanceForUser(@PathVariable String userId) {
+        return userService.getTotalBalanceForUser(userId);
+    }
 }

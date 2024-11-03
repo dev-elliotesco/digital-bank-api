@@ -2,6 +2,7 @@ package com.dev_elliotesco.digital_bank.mappers;
 
 import com.dev_elliotesco.digital_bank.dtos.TransactionRequestDTO;
 import com.dev_elliotesco.digital_bank.dtos.TransactionResponseDTO;
+import com.dev_elliotesco.digital_bank.dtos.TransactionSummaryDTO;
 import com.dev_elliotesco.digital_bank.models.Transaction;
 import org.springframework.stereotype.Component;
 
@@ -25,5 +26,13 @@ public class TransactionMapper {
         response.setTimestamp(LocalDateTime.now());
         response.setAccountId(accountId);
         return response;
+    }
+
+    public TransactionSummaryDTO toTransactionSummaryDTO(Transaction transaction) {
+        TransactionSummaryDTO summary = new TransactionSummaryDTO();
+        summary.setId(transaction.getId());
+        summary.setType(transaction.getType());
+        summary.setAmount(transaction.getAmount());
+        return summary;
     }
 }
