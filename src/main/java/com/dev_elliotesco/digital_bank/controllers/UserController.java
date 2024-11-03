@@ -1,5 +1,6 @@
 package com.dev_elliotesco.digital_bank.controllers;
 
+import com.dev_elliotesco.digital_bank.controllers.docs.UserControllerDOC;
 import com.dev_elliotesco.digital_bank.dtos.UserRequestDTO;
 import com.dev_elliotesco.digital_bank.dtos.UserResponseDTO;
 import com.dev_elliotesco.digital_bank.services.UserService;
@@ -12,7 +13,7 @@ import reactor.core.publisher.Mono;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/users")
-public class UserController {
+public class UserController implements UserControllerDOC {
 
     private final UserService userService;
 

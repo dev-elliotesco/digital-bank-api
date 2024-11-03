@@ -1,5 +1,6 @@
 package com.dev_elliotesco.digital_bank.controllers;
 
+import com.dev_elliotesco.digital_bank.controllers.docs.AccountControllerDOC;
 import com.dev_elliotesco.digital_bank.dtos.AccountRequestDTO;
 import com.dev_elliotesco.digital_bank.dtos.AccountResponseDTO;
 import com.dev_elliotesco.digital_bank.dtos.TransactionResponseDTO;
@@ -17,7 +18,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/accounts")
-public class AccountController {
+public class AccountController implements AccountControllerDOC {
 
     private final AccountService accountService;
     private final AccountMapper accountMapper;

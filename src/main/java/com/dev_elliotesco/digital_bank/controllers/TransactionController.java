@@ -1,5 +1,6 @@
 package com.dev_elliotesco.digital_bank.controllers;
 
+import com.dev_elliotesco.digital_bank.controllers.docs.TransactionControllerDOC;
 import com.dev_elliotesco.digital_bank.dtos.TransactionRequestDTO;
 import com.dev_elliotesco.digital_bank.dtos.TransactionResponseDTO;
 import com.dev_elliotesco.digital_bank.services.TransactionService;
@@ -12,7 +13,7 @@ import reactor.core.publisher.Mono;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/transactions")
-public class TransactionController {
+public class TransactionController implements TransactionControllerDOC {
 
     private final TransactionService transactionService;
 
