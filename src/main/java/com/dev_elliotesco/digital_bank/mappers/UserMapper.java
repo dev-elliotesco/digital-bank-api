@@ -5,9 +5,6 @@ import com.dev_elliotesco.digital_bank.dtos.UserResponseDTO;
 import com.dev_elliotesco.digital_bank.models.User;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.stream.Collectors;
-
 @Component
 public class UserMapper {
     public User toUser(UserRequestDTO userRequest) {
@@ -24,9 +21,6 @@ public class UserMapper {
         response.setName(user.getName());
         response.setEmail(user.getEmail());
         response.setAddress(user.getAddress());
-        response.setAccounts(user.getAccounts() != null ? user.getAccounts().stream()
-                .map(account -> new AccountMapper().toAccountResponseDTO(account))
-                .collect(Collectors.toList()) : new ArrayList<>());
         return response;
     }
 }

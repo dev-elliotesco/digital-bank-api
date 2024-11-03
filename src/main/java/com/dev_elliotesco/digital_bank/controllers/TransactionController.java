@@ -18,9 +18,7 @@ public class TransactionController {
 
     @PostMapping("/{accountId}")
     @ResponseStatus(HttpStatus.CREATED)
-    public Mono<TransactionResponseDTO> makeTransaction(
-            @PathVariable String accountId,
-            @Valid @RequestBody TransactionRequestDTO transactionRequest) {
+    public Mono<TransactionResponseDTO> makeTransaction(@PathVariable String accountId, @Valid @RequestBody TransactionRequestDTO transactionRequest) {
         return transactionService.makeTransaction(accountId, transactionRequest);
     }
 }

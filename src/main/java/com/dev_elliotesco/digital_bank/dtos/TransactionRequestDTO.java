@@ -1,5 +1,6 @@
 package com.dev_elliotesco.digital_bank.dtos;
 
+import com.dev_elliotesco.digital_bank.utils.ErrorMessages;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -8,11 +9,11 @@ import lombok.Data;
 
 @Data
 public class TransactionRequestDTO {
-    @NotEmpty(message = "El tipo de transacción no puede estar vacío")
-    @Pattern(regexp = "retiro|depósito", message = "El tipo de transacción debe ser 'retiro' o 'depósito'")
+    @NotEmpty(message = ErrorMessages.TRANSACTION_TYPE_NOT_EMPTY)
+    @Pattern(regexp = ErrorMessages.TRANSACTION_TYPE, message = ErrorMessages.TRANSACTION_TYPE_NOT_VALID)
     private String type;
 
-    @NotNull(message = "La cantidad no puede estar vacía")
-    @Min(value = 0, message = "La cantidad debe ser mayor o igual a 0")
+    @NotNull(message = ErrorMessages.TRANSACTION_AMOUNT_NOT_EMPTY)
+    @Min(value = 0, message = ErrorMessages.TRANSACTION_AMOUNT_NOT_VALID)
     private Double amount;
 }

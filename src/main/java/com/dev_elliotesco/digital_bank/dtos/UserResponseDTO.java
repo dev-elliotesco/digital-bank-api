@@ -10,5 +10,4 @@ public class UserResponseDTO {
     private String name;
     private String email;
     private String address;
-    private List<AccountResponseDTO> accounts;
 }
