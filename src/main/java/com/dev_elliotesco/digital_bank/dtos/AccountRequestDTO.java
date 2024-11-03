@@ -3,9 +3,14 @@ package com.dev_elliotesco.digital_bank.dtos;
 import com.dev_elliotesco.digital_bank.utils.ErrorMessages;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class AccountRequestDTO {
     @NotEmpty(message = ErrorMessages.ACCOUNT_NUMBER_NOT_EMPTY)
     private String number;

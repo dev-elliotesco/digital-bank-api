@@ -81,12 +81,12 @@ public class AccountService {
                 });
     }
 
-    private Mono<User> validateUser(String userId) {
+    public Mono<User> validateUser(String userId) {
         return userRepository.findById(userId)
                 .switchIfEmpty(Mono.error(new UserNotFoundException(ErrorMessages.USER_NOT_FOUND + userId)));
     }
 
-    private Mono<Void> validateAccountNumber(String accountNumber) {
+    public Mono<Void> validateAccountNumber(String accountNumber) {
         return accountRepository.findByNumber(accountNumber)
                 .flatMap(existingAccount ->
                         Mono.error(new AccountAlreadyExistsException(ErrorMessages.ACCOUNT_ALREADY_EXISTS + accountNumber))
@@ -99,7 +99,7 @@ public class AccountService {
                 .switchIfEmpty(Mono.error(new AccountNotFoundException(ErrorMessages.ACCOUNT_NOT_FOUND + accountNumber)));
     }
 
-    private Mono<AccountResponseDTO> saveAccount(User user, AccountRequestDTO accountRequest) {
+    public Mono<AccountResponseDTO> saveAccount(User user, AccountRequestDTO accountRequest) {
         Account account = accountMapper.toAccount(accountRequest);
 
         if (user.getAccounts() == null) {
