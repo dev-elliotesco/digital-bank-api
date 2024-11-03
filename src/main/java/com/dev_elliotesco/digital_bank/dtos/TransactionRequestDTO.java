@@ -7,9 +7,11 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class TransactionRequestDTO {
     @NotEmpty(message = ErrorMessages.TRANSACTION_TYPE_NOT_EMPTY)
     @Pattern(regexp = ErrorMessages.TRANSACTION_TYPE, message = ErrorMessages.TRANSACTION_TYPE_NOT_VALID)
